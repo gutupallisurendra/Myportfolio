@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G. Surendra | Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #0f172a;
+      color: #e5e7eb;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #38bdf8;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: #38bdf8; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .nav-toggle .bar {
+      width: 24px;
+      height: 3px;
+      background: #e5e7eb;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #0f172a;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        display: none;
+        border-top: 1px solid #1f2937;
+      }
+
+      .nav-links.show { display: flex; }
+
+      .nav-links a { padding: 0.5rem 0; }
+
+      .nav-toggle.active .bar:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px);
+      }
+      .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
+      .nav-toggle.active .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+    }
+
+    /* Layout helpers */
+    .section { padding: 3rem 1rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #f1f5f9;
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      padding: 3.5rem 1rem 3rem;
+     
+    }
+
+    .hero-inner {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-text h2 {
+      font-size: 1.1rem;
+      color: #38bdf8;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-text h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.75rem;
+      color: #f9fafb;
+    }
+
+    .hero-text p {
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      display: inline-block;
+      padding: 0.7rem 1.6rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary { background: #38bdf8; color: #020617; }
+    .btn-primary:hover {
+      background: #0ea5e9;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid #38bdf8;
+      color: #e5e7eb;
+    }
+    .btn-outline:hover {
+      background: rgba(56, 189, 248, 0.06);
+      transform: translateY(-2px);
+    }
+   
+
+/* Hero profile image (circle) */
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  justify-self: center;
+}
+
+
+.hero-image-ring {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  padding: 2px;
+  background-color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.9);
+}
+
+.hero-profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0b1120;
+
+  /* smooth IN + OUT */
+  transition: transform 0.5s ease-in-out;
+}
+
+.hero-profile-img:hover {
+  transform: scale(1.10);
+  cursor: zoom-in;
+}
+
+@media (min-width: 768px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr);
+  }
+  .hero-text h1 {
+    font-size: 2.8rem;
+  }
+}
+
+    /* ============ ABOUT ============ */
+    .about { background: #020617;text-align: center;justify-content: center; }
+    
+
+    .about-highlight { color: #cbd5e1; }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .about-tag {
+      font-size: 0.8rem;
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #9ca3af;
+    }
+
+    @media (min-width: 768px) {
+      .about-inner {
+        grid-template-columns: 2fr 1.5fr;
+      }
+    }
+
+    /* ============ SKILLS ============ */
+    .skills { background: #020617; }
+
+    .skills-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: #0b1120;
+      border-radius: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid #1f2937;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.7);
+      border-color: #38bdf8;
+    }
+
+    .skill-card h3 {
+      color: #38bdf8;
+      margin-bottom: 0.45rem;
+      font-size: 1.05rem;
+    }
+
+    .skill-card p { color: #cbd5e1; font-size: 0.95rem; }
+
+    @media (min-width: 768px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .skills-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    /* ============ EDUCATION ============ */
+    .education { background: #020617; }
+
+    .edu-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      border-radius: 0.75rem;
+      padding: 1.4rem 1.5rem;
+      background: #0b1120;
+      border-left: 4px solid #38bdf8;
+      border-top: 1px solid #1f2937;
+      border-right: 1px solid #1f2937;
+      border-bottom: 1px solid #1f2937;
+      transition: all 0.25s ease;
+    }
+
+    .edu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.9);
+    }
+
+    .edu-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.35rem;
+      color: #e5e7eb;
+    }
+
+    .edu-meta {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .edu-card p {
+      font-size: 0.95rem;
+      color: #d1d5db;
+    }
+
+    @media (min-width: 768px) {
+      .edu-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* ============ PROJECTS ============ */
+    .projects { background: #0f172a; }
+
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border-radius: 0.75rem;
+      padding: 1.4rem 1.5rem;
+      background: #1e293b;
+      border: 1px solid #334155;
+      transition: all 0.25s ease;
+    }
+
+    .project-card:hover {
+      border-color: #38bdf8;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.9);
+      transform: translateY(-4px);
+    }
+
+    .project-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #e5e7eb;
+    }
+
+    .project-card p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    @media (min-width: 768px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* ============ ACHIEVEMENTS ============ */
+    .achievements { background: #020617; }
+
+    .achievements-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .ach-card {
+      border-radius: 0.75rem;
+      padding: 1.2rem 1.4rem;
+      background: #0b1120;
+      border: 1px solid #1f2937;
+      transition: all 0.25s ease;
+    }
+
+    .ach-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.7);
+      border-color: #facc15;
+    }
+
+    .ach-title {
+      font-size: 0.98rem;
+      color: #e5e7eb;
+      margin-bottom: 0.3rem;
+    }
+
+    .ach-meta {
+      font-size: 0.8rem;
+      color: #fbbf24;
+      margin-bottom: 0.4rem;
+    }
+
+    .ach-desc {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    @media (min-width: 768px) {
+      .achievements-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .achievements-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* ============ CONTACT ============ */
+    .contact { background: #0f172a; }
+
+    .contact-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      border-radius: 0.75rem;
+      padding: 1.4rem 1.5rem;
+      background: #020617;
+      border: 1px solid #1f2937;
+    }
+
+    .contact-label {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .contact-value {
+      font-size: 0.98rem;
+      color: #e5e7eb;
+    }
+
+    .contact-value a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    .contact-value a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: #020617;
+      border-top: 1px solid #1f2937;
+      color: #6b7280;
+      font-size: 0.85rem;
+    }
+
+    /* small devices tweaks */
+    @media (max-width: 480px) {
+      body { font-size: 14px; }
+      .nav-container { padding-inline: 0.75rem; }
+      .hero-text h1 { font-size: 2rem; }
+      .section-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">G. Surendra</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#internships">Internships</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="section hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h2>Computer Science & Data Science</h2>
+        <h1>G. Surendra</h1>
+        <p>
+          Aspiring software and data professional focused on applying technical skills,
+          logical thinking, and passion for development to solve real-world problems
+          and contribute to impactful projects.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">View Project</a>
+          <a href="#contact" class="btn-outline">Contact Details</a>
+        </div>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <div class="hero-image-ring">
+          <!-- Replace photo.jpg with your real image path or URL -->
+          <img src="C:\Users\nagav\Downloads\suri.jpeg" alt="Suri" class="hero-profile-img" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-inner">
+        <div>
+          <p class="about-highlight">
+            To pursue a challenging and growth-oriented career in Computer Science and Data Science by effectively applying strong technical skills, logical reasoning, and a deep passion for software development. I am committed to continuous learning and skill enhancement while building practical, real-world solutions. I have a keen interest in developing AI-powered systems, scalable web applications, and data-driven projects that deliver meaningful impact. Through active participation in hackathons, technical seminars, and certified programs, I have strengthened both my technical expertise and professional competencies, preparing myself to contribute effectively in dynamic and collaborative environments.
+          </p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section skills">
+    <div class="container">
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Programming</h3>
+          <p>Python for problem solving, scripting, and basic data handling.</p>
+        </div>
+        <div class="skill-card">
+          <h3>Databases</h3>
+          <p>SQL for querying, filtering, and managing structured data.</p>
+        </div>
+        <div class="skill-card">
+          <h3>Web</h3>
+          <p>HTML for building structured web pages and simple static sites.</p>
+        </div>
+        <div class="skill-card">
+          <h3>Office Tools</h3>
+          <p>MS Office Suite and PowerPoint for documentation and presentations.</p>
+        </div>
+        <div class="skill-card">
+          <h3>Security & Data</h3>
+          <p>Basics of cyber security and data pipelines.</p>
+        </div>
+        <div class="skill-card">
+          <h3>Soft Skills</h3>
+          <p>Time management and Team collaboration.</p>
+        </div>
+        <div class="skill-card">
+          <h3>Learning Mindset</h3>
+          <p>More interest in learning new skills and exploring new technologies.</p>
+        </div>
+        <div class="skill-card">
+          <h3>Activities</h3>
+          <p>Actively participates in quiz programs and workshops.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="section education">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <h3>B.Tech in Computer Science</h3>
+          <p class="edu-meta">
+            JNTUA · Santhiram Engineering College · 2026 (Pursuing) · 78.8% up to 6th semester
+          </p>
+          <p>
+            Building strong foundations in computer science, data science concepts,
+            and software development through academic projects and coursework.
+          </p>
+        </div>
+        <div class="edu-card">
+          <h3>Intermediate (RAO'S Jr. College)</h3>
+          <p class="edu-meta">
+            BIEAP · 2022 · 66.8% 
+          </p>
+          <p>
+            Focused on core intermediate subjects, strengthening analytical skills
+            useful for engineering studies.
+          </p>
+        </div>
+        <div class="edu-card">
+          <h3>10th Class (SSC)</h3>
+          <p class="edu-meta">
+            BSEAP · Z.P.H.S · 2020 · 99.6% 
+          </p>
+          <p>
+            Achieved excellent academic performance, creating a strong base in
+            fundamental subjects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Traffictelligence: AI-Powered Traffic Management</h3>
+          <p>
+            8-week project at Smart Internz focused on an AI-based traffic management
+            solution. Gained hands-on experience in understanding how real-world
+            projects are built and delivered. [file:80]
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements" class="section achievements">
+    <div class="container">
+      <h2 class="section-title">Workshops & Achievements</h2>
+      <div class="achievements-grid">
+        <div class="ach-card">
+          <div class="ach-title">24-hour Hackathon Participation</div>
+          <div class="ach-meta">Web Development</div>
+          <div class="ach-desc">
+            Participated in a 24-hour hackathon to build a website using HTML and CSS,
+            gaining experience in rapid development.
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-title">Seminar on Benefits of Growing Green</div>
+          <div class="ach-meta">Public Speaking</div>
+          <div class="ach-desc">
+            Delivered a seminar for school students on environmental awareness and the
+            benefits of growing green.
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-title">Python Fullstack & Cyber Security Certificates</div>
+          <div class="ach-meta">Eduskills</div>
+          <div class="ach-desc">
+            Completed certifications covering network security, threat detection, and
+            data pipeline design with practical labs and case studies. [file:80]
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-title">Time Management & Email Writing</div>
+          <div class="ach-meta">Infosys Springboard</div>
+          <div class="ach-desc">
+            Earned certificates in time management and professional email writing,
+            improving workplace readiness.
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-title">Quiz Program Participation</div>
+          <div class="ach-meta">Extra Curricular</div>
+          <div class="ach-desc">
+            Actively participates in quiz programmes, reflecting curiosity and willingness
+            to learn.
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-title">Continuous Skill Development</div>
+          <div class="ach-meta">Learning</div>
+          <div class="ach-desc">
+            Shows more interest in learning new skills, tools, and technologies on an
+            ongoing basis.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">
+            <a href="mailto:gutupallisurendra@gmail.com">gutupallisurendra@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">
+            <a href="tel:+918688278853">+91 86882 78853</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Address</div>
+          <div class="contact-value">
+            1-50, Bukkapuram, Mahanandi, Nandyal, Andhra Pradesh, 518523.
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Languages</div>
+          <div class="contact-value">
+            English, Telugu.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 G. Surendra. All rights reserved.</p>
+  </footer>
+
+  <!-- NAV SCRIPT -->
+  <script>
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+      navToggle.classList.toggle("active");
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+        navToggle.classList.remove("active");
+      });
+    });
+  </script>
+</body>
+</html>
